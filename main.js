@@ -16,6 +16,8 @@ let startRotationX;
 let startRotationY;
 let startPositionX;
 
+const audio = new Audio("tanjiro/sound.mp4");
+
 const loader = new GLTFLoader();
 const textureLoader = new THREE.TextureLoader();
 
@@ -75,12 +77,13 @@ cone.position.y += 1.5;
 
 camera.position.z = 3;
 
-let startAnimation = 80;
+let startAnimation = 180;
 let iterationCount = 0;
-let maxIterations = 100;
-let animationReset = 180;
+let maxIterations = 200;
+let animationReset = 300;
 
 function animate() {
+  audio.play();
   if (iterationCount >= startAnimation) {
     if (tanjiro) {
       tanjiro.rotation.y += 0.5;
@@ -105,6 +108,8 @@ function animate() {
         scene.remove(cone);
         scene.add(cube);
 
+        audio.pause();
+        audio.currentTime = 0;
         iterationCount = 0;
       }
     }
